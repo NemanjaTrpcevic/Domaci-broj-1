@@ -1,0 +1,50 @@
+  import math
+    pi = math.pi
+    
+  class krug:
+    def __init__(self, poluprecnik, obim, povrsina):
+    self.poluprecnik = poluprecnik
+    self.obim = obim
+    self.porsina = povrsina
+
+  def obimKruga(self):
+    self.obim = 2 * self.poluprecnik * pi
+    print("Obim je " + str(self.obim))
+
+  def povrsinaKruga(self):
+    self.povrsina = self.poluprecnik ** 2 * pi
+    print("Povrsina je " + str(self.povrsina))
+
+
+
+  class kvadrat:
+    def __init__(self, stranica, obim, povrsina):
+    self.stranica = stranica
+    self.obim = obim
+    self.porsina = povrsina
+
+  def ObimKvadrata(self):
+    self.obim = 4 * self.stranica
+    print("Obim kvadrata je " + str(self.obim))
+
+  def povrsinKvadrata(self):
+    self.povrsina = self.stranica ** 2
+    print("Povrsina kvadrata je " + str(self.povrsina))
+
+
+
+  class pravougaonik:
+    def __init__(self, prvaStranica, drugaStranica, obim, povrsina):
+    self.prvaStranica = prvaS
+    self.drugaStranica = drugas
+    self.obim = obim
+    self.povrsina = povrsina
+   
+  def povrsinaPravouganik(self):
+      self.povrsina = self.prvaStranic * self.drugaStranica
+      print("Porvsina trugla je" + str(self.povrsina))
+      
+  def obimPravouganika(self):
+      self.obim = 2 * (self.prvaStranica + self.drugaStranica)
+      print("obim provugaonika je" + str(self.obim))
+    
