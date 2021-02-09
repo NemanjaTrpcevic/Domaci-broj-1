@@ -1,0 +1,112 @@
+class Biblioteka:
+    def __init__(self, naziv):
+        self.naziv = naziv
+        self.spisak = []
+
+    def info_biblioteka(self):
+        f = open("knjige.txt", "r")
+        pom_lista = []
+        pom = f.readlines()
+        for item in pom:
+            info = item.split("|")
+            pom_lista.append(info[1])
+        self.spisak = pom_lista
+        f.close()
+        print("Ime biblioteke: ", str(self.naziv), ", spisak dostupnih knjiga je: ")
+        for item in self.spisak:
+            print(" " + str(item))
+        pom_lista.clear()
+       
+       
+ class Knjiga:
+    def __init__(self, naslov, autor, zanr, biblioteka):
+        self.naslov = naslov
+        self.autor = autor
+        self.zanr = zanr
+        self.biblioteka = biblioteka
+        self.__get_isbn()
+        self.Unos()
+    
+  def Unos(self):
+        f = open("knjige.txt", "a")
+        f.write(str(self.isbn) + "|" + self.naslov + "|" + self.autor + "|" + self.zanr+ "|" + self.biblioteka.naziv + "\n")
+        f.close()
+    
+  def __get_isbn(self):
+        self.isbn = random.randint(1, 100)
+        f = open("knjige.txt", "r")
+        lines = f.readlines()
+        for item in lines:
+            info = item.split("|")
+            while int(info[0]) == self.isbn:
+                self.isbn = random.randint(1, 100)
+        f.close()
+        
+        
+def UnosKnjige(biblioteka):
+    naslov = input("Unesite naslov knjige: ")
+    autor = input("Unesite autora: ")
+    zanr = input("Unesite zanr: ")
+    Knjiga_1 = Knjiga(naslov, autor, zanr, Biblioteka_1)
+    
+    
+def InfoKnjige():
+
+    f = open("knjige.txt", "r")
+    pom = f.readlines()
+    f.close()
+
+    pom_lista = []
+    for item in pom:
+        info = item.split("|")
+        pom_lista.append(info[0])
+
+    print("Serijski broj svih knjiga: ")
+    print(pom_lista)
+    pom_lista.clear()
+
+    isbn_knjige = input("Unesite serijski broj vase knjige: ")
+    for item in pom:
+        info = item.split("|")
+
+        if isbn_knjige == info[0]:
+            print("Naslov: ", info[1])
+            print("Autor: ", info[2])
+            print("Zanr: ", info[3])
+            print("Biblioteka: ", info[4])
+            
+            
+            
+if __name__ == '__main__':
+    Biblioteka_1 = Biblioteka("Knjizice")
+
+    print("-----Meni-----")
+    print("1. Dodaj novu knjigu")
+    print("2. Podaci o biblioteci")
+    print("3. Podaci o knjizi")
+    print("4. Exit")
+    n = input("Unesite sta zelite da uradite: ")
+
+    if int(n) == 1:
+        UnosKnjige(Biblioteka_1)
+    elif int(n) == 2:
+        Biblioteka_1.info_biblioteka()
+    elif int(n) == 3:
+        InfoKnjige()
+    elif int(n) == 4:
+        exit()
+    elif int(n) > 4 or int(n) < 1:
+        print("Niste uneli korektan broj") 
+    
+    
+    Implementirati konzolnu aplikaciju za vođenje evidencije knjiga u Biblioteki. Svaka knjiga je opisana sa klasom Knjiga.
+    Klasa Knjiga ima sledeće atribute: isbn (jedinstven identifikator), naslovom (string), autorom (string), žanrovima (lista)
+    i biblioteka u kojoj se nalazi (biblioteka). Biblioteka je opisana preko klase Biblioteka. Klasa Biblioteka sadrži atribute:
+    naziv (string), knjige (lista Knjiga). Aplikacija treba da podrži sledeće funkcionalnosti:
+
+Dodavanje nove knjige u biblioteku. Knjiga prilikom kreiranja treba automatski da se doda u biblioteku.
+Dodatno ograničenje: treba da se postuje jedinstveni identifikator, tj. ne mogu dve knjige da imaju isti ISBN.
+Izlistavanja podataka o biblioteci. Naziv i knjige koje se nalaze u biblioteci.
+Izlistavanje podataka o knjizi. Treba da se prikažu svi atributi koji opisuju jednu knjigu. Knjiga se pretražuje preko atributa ISBN.
+Radi jednostavnosti, sistem treba da ima samo jednu biblioteku i više knjiga. Svi podaci se kreiraju programski. 
+Nije neophodno podržati rad sa fajlovima. Klase Knjiga i Biblioteka se nalaze u vezi one-to-many. Knjiga se nalazi u jednoj biblioteci, a biblioteka sadrži više knjiga.
