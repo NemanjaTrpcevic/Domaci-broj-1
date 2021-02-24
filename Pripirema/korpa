@@ -1,0 +1,21 @@
+class korpa:
+
+    def __init__(self, korpa_id):
+        self.korpa_id=korpa_id
+        self.lista_voca=[]
+        self.ukupno=0
+
+    def __add__(self, voce):
+        if voce in self:
+            return f"Cannot add book with isbn: {voce.voce_id} to library!"
+        voce.dodaj_u_korpu(self)
+        self.lista_voca.append(voce)
+        self.ukupno=self.ukupno + 1
+        return f"Book with isbn {voce.voce_id} successfully added!"
+
+    def __contains__(self, item):
+
+        for voce in self.lista_voca:
+            if voce == item:
+                return True
+        return False
